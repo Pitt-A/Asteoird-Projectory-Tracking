@@ -1,0 +1,4 @@
+﻿  Game.cpp
+d:\projects\knuckles\knuckles\game.cpp(52): warning C4018: '<': signed/unsigned mismatch
+  Knuckles.vcxproj -> D:\Projects\Knuckles\Debug\Knuckles.exe
+  Knuckles.vcxproj -> D:\Projects\Knuckles\Debug\Knuckles.pdb (Partial PDB)

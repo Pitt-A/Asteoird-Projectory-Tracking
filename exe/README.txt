@@ -1,0 +1,1 @@
+IF you wish to move the .exe file, please take the "Assets" folder with it, otherwise the program will fail to launch.
