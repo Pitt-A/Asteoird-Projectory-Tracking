@@ -1,59 +1,9 @@
-﻿Build started 05/04/2017 16:10:31.
+﻿Build started 05/04/2017 22:03:47.
      1>Project "\\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\Knuckles\Knuckles.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"\\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\\SFML-2.4.2\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D SFML_STATIC /D _MBCS /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Release\\" /Fd"Release\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Asteroid.cpp Game.cpp GameObject.cpp main.cpp NameGenerator.cpp PlanetaryBody.cpp
-         Asteroid.cpp
-     1>Asteroid.cpp(10): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-     1>Asteroid.cpp(67): warning C4018: '<': signed/unsigned mismatch
-     1>Asteroid.cpp(83): warning C4018: '<': signed/unsigned mismatch
-         Game.cpp
-     1>Game.cpp(5): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>Game.cpp(12): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-     1>Game.cpp(22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-     1>Game.cpp(93): warning C4018: '<': signed/unsigned mismatch
-     1>Game.cpp(129): warning C4018: '<': signed/unsigned mismatch
-     1>Game.cpp(134): warning C4018: '<': signed/unsigned mismatch
-     1>Game.cpp(139): warning C4018: '<': signed/unsigned mismatch
-     1>Game.cpp(157): warning C4018: '<': signed/unsigned mismatch
-     1>Game.cpp(187): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-     1>Game.cpp(189): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-     1>Game.cpp(190): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-     1>Game.cpp(195): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-     1>Game.cpp(202): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-     1>Game.cpp(227): warning C4018: '<': signed/unsigned mismatch
-     1>Game.cpp(229): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-     1>Game.cpp(230): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-     1>Game.cpp(236): warning C4018: '<': signed/unsigned mismatch
-     1>Game.cpp(249): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-     1>Game.cpp(251): warning C4018: '<': signed/unsigned mismatch
-     1>Game.cpp(257): warning C4018: '<': signed/unsigned mismatch
-     1>Game.cpp(274): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-     1>Game.cpp(280): warning C4018: '<': signed/unsigned mismatch
-     1>Game.cpp(282): warning C4018: '<': signed/unsigned mismatch
-     1>Game.cpp(288): warning C4018: '<': signed/unsigned mismatch
-         GameObject.cpp
-     1>GameObject.cpp(69): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>GameObject.cpp(82): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-         main.cpp
-         NameGenerator.cpp
-         PlanetaryBody.cpp
-     1>PlanetaryBody.cpp(80): warning C4018: '<': signed/unsigned mismatch
-     1>PlanetaryBody.cpp(93): warning C4018: '<': signed/unsigned mismatch
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"\\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\Release\Knuckles.exe" /NOLOGO /LIBPATH:"\\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\\SFML-2.4.2\lib" "sfml-main.lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" "sfml-network-s.lib" "sfml-audio-s.lib" ws2_32.lib openal32.lib flac.lib vorbisenc.lib vorbisfile.lib vorbis.lib ogg.lib winmm.lib opengl32.lib gdi32.lib freetype.lib jpeg.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"\\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\Release\Knuckles.pdb" /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"\\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\Release\Knuckles.lib" /MACHINE:X86 /SAFESEH Release\Asteroid.obj
-         Release\Game.obj
-         Release\GameObject.obj
-         Release\main.obj
-         Release\NameGenerator.obj
-         Release\PlanetaryBody.obj
-         Generating code
-         805 of 809 functions (99.5%) were compiled, the rest were copied from previous compilation.
-           0 functions were new in current compilation
-           0 functions had inline decision re-evaluated but remain unchanged
-         Finished generating code
+     1>Link:
          Knuckles.vcxproj -> \\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\Release\Knuckles.exe
      1>Done Building Project "\\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\Knuckles\Knuckles.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:07.19
+Time Elapsed 00:00:00.51

@@ -85,7 +85,7 @@ void Game::Execute()
 					view.zoom(0.5f);
 					viewZoom *= 0.5f;
 				}
-				if (event.mouseWheel.delta == -1 && viewZoom < 16)
+				if (event.mouseWheel.delta == -1 && viewZoom < 32)
 				{
 					view.zoom(2.0f);
 					viewZoom *= 2.0f;
