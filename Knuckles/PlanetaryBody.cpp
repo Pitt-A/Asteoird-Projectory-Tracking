@@ -62,6 +62,7 @@ float PlanetaryBody::GetGravConst() //Getting the gravitation constant for simul
 
 void PlanetaryBody::TrailRenderer() //Adding the next vertex to the vertex array
 {
+	mass = 5.973f * GetScale();
 	if (!isStar) //Only add to vertex array if not a star
 	{
 		if (completeTrail) //The complete trail code
@@ -106,4 +107,9 @@ sf::VertexArray PlanetaryBody::GetTrail() //Getting the trail for drawing
 void PlanetaryBody::SetTrailComplete(bool _bool) //Setting whether the trail should extend to a compelete cycle (planets) or not (asteroids)
 {
 	completeTrail = _bool;
+}
+
+float PlanetaryBody::GetMass()
+{
+	return mass;
 }

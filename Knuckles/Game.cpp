@@ -237,7 +237,8 @@ void Game::DisplayAsteroidInfo(std::vector<Asteroid*> _asteroids, sf::RenderWind
 	std::string plInfo = "The [" + _planets.at(0)->GetName() + "] System\n\n";	
 	for (int i = 1; i < _planets.size(); i++) //For loop adding an entry for each planet on the left side of the screen
 	{
-		plInfo += _planets.at(i)->GetName() + "\n" + "Atmosphere: " + _planets.at(i)->GetAtmosphereName() + "\nStrength: " + std::to_string(_planets.at(i)->GetThickness()) + "%\n\n";
+		plInfo += "[" + _planets.at(i)->GetName() + "]\n" + "Atmosphere: " + _planets.at(i)->GetAtmosphereName() + "\nAtmosphere Strength: " + std::to_string(_planets.at(i)->GetThickness()) + "%\n";
+		plInfo += "Mass: " + std::to_string(_planets.at(i)->GetMass()) + " x 10^24 kg\n\n";
 	}
 	planetInfo.setString(plInfo);
 
