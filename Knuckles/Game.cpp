@@ -2,21 +2,21 @@
 
 Game::Game()
 {
-	std::srand(std::time(NULL));
+	std::srand(std::time(NULL)); //Seed the random number generator
 
-	font.loadFromFile("Assets/pixelFont.ttf");
+	font.loadFromFile("Assets/pixelFont.ttf"); //Load the font
 
-	asteroidInfo.setFillColor(sf::Color::White);
+	asteroidInfo.setFillColor(sf::Color::White); //Setup the asteroidInfo text
 	asteroidInfo.setFont(font);
 	asteroidInfo.setCharacterSize(16);
 	asteroidInfo.setPosition(sf::Vector2f(windowWidth - 150, 10));
 
-	planetInfo.setFillColor(sf::Color::White);
+	planetInfo.setFillColor(sf::Color::White); //Setup the planetInfo text
 	planetInfo.setFont(font);
 	planetInfo.setCharacterSize(16);
 	planetInfo.setPosition(sf::Vector2f(10, 10));
 
-	collisionAlert.setFillColor(sf::Color::White);
+	collisionAlert.setFillColor(sf::Color::White); //Setup the collisionAlert text
 	collisionAlert.setFont(font);
 	collisionAlert.setCharacterSize(16);
 	collisionAlert.setPosition(sf::Vector2f(10, windowHeight - 30));
@@ -31,37 +31,38 @@ Game::~Game()
 
 void Game::Execute()
 {
-	WindowSetup(false);
+	WindowSetup(false); //Create a new window
 	view = m_window->getView();
 
+	//Create the three lists to contain the different gameObjects
 	std::vector<GameObject*> _gameObjectList;
 	std::vector<PlanetaryBody*> _planetaryBodyList;
 	std::vector<Asteroid*> _asteroidList;
 
-	NameGenerator* nameGen = new NameGenerator;
+	NameGenerator* nameGen = new NameGenerator; //Creating a new NameGenerator
 	std::string starName;
 
-	starName = nameGen->CreateStarName();
+	starName = nameGen->CreateStarName(); //Generate the star's name
 
-	PlanetaryBody *starObject = new PlanetaryBody(true, NULL, 0.0003f);
+	PlanetaryBody *starObject = new PlanetaryBody(true, NULL, 0.0003f); //Create the central star
 	starObject->SetCircle(sf::Color(255, 127, 0, 255), 2.0f);
 	starObject->SetPos(sf::Vector2f(windowWidth / 2.0f, windowHeight / 2.0f));
 	starObject->SetName(starName);
 	_gameObjectList.push_back(starObject);
 	_planetaryBodyList.push_back(starObject);
 
-	for (int i = 0; i < std::rand() % 5 + 4; i++)
+	for (int i = 0; i < std::rand() % 5 + 4; i++) //Generate a random number of planets
 	{
 		GeneratePlanet(starObject, _gameObjectList, _planetaryBodyList, i, starName, nameGen);
 	}
 
 	GenerateAsteroid(_planetaryBodyList, _gameObjectList, _asteroidList, nameGen);
 
-	while (m_window->isOpen())
+	while (m_window->isOpen()) //Only exit when closing window
 	{
 		CollisionDetection(_planetaryBodyList, _asteroidList, _gameObjectList);
 
-		if (asteroidToDelete >= 0 || gameobjectToDelete >= 0)
+		if (asteroidToDelete >= 0 || gameobjectToDelete >= 0) //Handling the deletion of the asteroid upon collision (roundabout way, hence why it's here instead of CollisionDetection())
 		{
 			delete _asteroidList.at(asteroidToDelete);
 			_asteroidList.erase(_asteroidList.begin() + asteroidToDelete);
@@ -73,11 +74,11 @@ void Game::Execute()
 		view = m_window->getView();
 		while (m_window->pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) //Only exit when closing window
 			{
 				m_window->close();
 			}
-			else if (event.type == sf::Event::MouseWheelMoved)
+			else if (event.type == sf::Event::MouseWheelMoved) //Handling the zooming in/out
 			{
 				if (event.mouseWheel.delta == 1)
 				{
@@ -92,17 +93,17 @@ void Game::Execute()
 
 				for(int i = 0; i < _asteroidList.size(); i++)
 				{
-					_asteroidList.at(i)->UpdateZoom(viewZoom);
+					_asteroidList.at(i)->UpdateZoom(viewZoom); //Updating the zoom level for asteroid placement
 				}
 			}
-			else if (event.type == sf::Event::MouseButtonPressed)
+			else if (event.type == sf::Event::MouseButtonPressed) //Main mouse button check
 			{
-				if (event.mouseButton.button == sf::Mouse::Right)
+				if (event.mouseButton.button == sf::Mouse::Right) //RMB for panning
 				{
 					isPanning = true;
 					panningStart = sf::Vector2f(sf::Mouse::getPosition());
 				}
-				else if (event.mouseButton.button == sf::Mouse::Left)
+				else if (event.mouseButton.button == sf::Mouse::Left) //LMB for placing asteroid
 				{
 					if (_asteroidList.size() == 0 || _asteroidList.at(_asteroidList.size() - 1)->GetState() == AsteroidState::AS_SIM && _asteroidList.size() <= 12)
 					{
@@ -112,7 +113,7 @@ void Game::Execute()
 			}
 			else if (event.type == sf::Event::MouseButtonReleased)
 			{
-				if (event.mouseButton.button == sf::Mouse::Right)
+				if (event.mouseButton.button == sf::Mouse::Right) //For turning the panning off when not right clicking
 				{
 					isPanning = false;
 				}
@@ -121,36 +122,36 @@ void Game::Execute()
 
 		if (isPanning)
 		{
-			CameraPan();
+			CameraPan(); 
 		}
 
 		m_window->setView(view);
-		m_window->clear(sf::Color(0, 0, 0, 0));
-		for (int i = 0; i < _gameObjectList.size(); i++)
+		m_window->clear(sf::Color(0, 0, 0, 0)); //Background colour (black)
+		for (int i = 0; i < _gameObjectList.size(); i++) //Add all gameObjects to the frame buffer and update
 		{
 			_gameObjectList.at(i)->Update();
 			m_window->draw(_gameObjectList.at(i)->Draw());
 		}
-		for (int i = 0; i < _asteroidList.size(); i++)
+		for (int i = 0; i < _asteroidList.size(); i++) //Add all trails and aimlines to the draw buffer
 		{
 			m_window->draw(_asteroidList.at(i)->GetTrail());
 			m_window->draw(_asteroidList.at(i)->GetAimLine());
 		}
-		for (int i = 0; i < _planetaryBodyList.size(); i++)
+		for (int i = 0; i < _planetaryBodyList.size(); i++) //Add all trails and atmospheres to the draw buffer
 		{
 			m_window->draw(_planetaryBodyList.at(i)->GetTrail());
 			m_window->draw(_planetaryBodyList.at(i)->GetAtmosphere());
 		}
-		DisplayPlanetaryBodyNames(_planetaryBodyList, m_window, viewZoom, _asteroidList);
+		DisplayPlanetaryBodyNames(_planetaryBodyList, m_window, viewZoom, _asteroidList); //Update the information displayed on screen
 
-		m_window->setView(originalView);
-		m_window->draw(asteroidInfo);
+		m_window->setView(originalView); //Swap the current view out with the original, to draw the info in the same spot each time without updating zoom and positions
+		m_window->draw(asteroidInfo); //Add the info's to the draw buffer
 		m_window->draw(planetInfo);
 		m_window->draw(collisionAlert);
-		DisplayAsteroidInfo(_asteroidList, m_window, _planetaryBodyList);
-		m_window->setView(view);
+		DisplayAsteroidInfo(_asteroidList, m_window, _planetaryBodyList); //Update the information displayed on screen
+		m_window->setView(view); //Set the view back to the proper view to be rendered
 		
-		m_window->display();
+		m_window->display(); //Draw the frame buffer to screen
 	}
 
 	//No need to clear other vectors out as all pointers are added to _gameObjectList
@@ -161,28 +162,29 @@ void Game::Execute()
 			delete _gameObjectList.at(i);
 		}
 	}
+	delete nameGen;
 	return;
 }
 
-void Game::WindowSetup(bool _fullscreen)
+void Game::WindowSetup(bool _fullscreen) //Setting up the window for drawing
 {
-	if (_fullscreen)
+	if (_fullscreen) //Fullscreen mode, only accessible through code
 	{
 		m_window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "Asteroid Simulator", sf::Style::None);
 		sf::Vector2u tempVec = m_window->getSize();
 	}
-	else
+	else //(1440 x 900) mode, only present mode in final build
 	{
 		m_window = new sf::RenderWindow(sf::VideoMode(windowWidth, windowHeight), "Asteroid Simulator");
 	}
 	
-	m_window->setFramerateLimit(60);
-	m_window->setVerticalSyncEnabled(true);
-	originalView = m_window->getView();
+	m_window->setFramerateLimit(60); //Framerate limit, included to prevent stuttering
+	m_window->setVerticalSyncEnabled(true); //VSync, included to prevent tearing
+	originalView = m_window->getView(); //Setting up the original view for UI rendering
 }
 
 void Game::GeneratePlanet(PlanetaryBody* _target, std::vector<GameObject*>& _gameObjectList, std::vector<PlanetaryBody*>& _planetaryBodyList,
-	int& _planetNo, std::string _starName, NameGenerator* _nameGen)
+	int& _planetNo, std::string _starName, NameGenerator* _nameGen) //Creating a new planet
 {
 	float planetScale = rand() % 300 + 70;
 	planetScale = planetScale / 100;
@@ -208,7 +210,7 @@ void Game::GeneratePlanet(PlanetaryBody* _target, std::vector<GameObject*>& _gam
 	_planetaryBodyList.push_back(planetObject);
 }
 
-void Game::GenerateAsteroid(std::vector<PlanetaryBody*> _planetList, std::vector<GameObject*>& _gameObjectList, std::vector<Asteroid*>& _asteroidList, NameGenerator* _nameGen)
+void Game::GenerateAsteroid(std::vector<PlanetaryBody*> _planetList, std::vector<GameObject*>& _gameObjectList, std::vector<Asteroid*>& _asteroidList, NameGenerator* _nameGen) //Creating a new asteroid
 {
 	Asteroid *asteroidObject = new Asteroid(m_window, _planetList);
 	asteroidObject->SetCircle(sf::Color(120, 120, 120, 255), 0.5f);
@@ -221,10 +223,10 @@ void Game::GenerateAsteroid(std::vector<PlanetaryBody*> _planetList, std::vector
 	_asteroidList.push_back(asteroidObject);
 }
 
-void Game::DisplayAsteroidInfo(std::vector<Asteroid*> _asteroids, sf::RenderWindow* _window, std::vector<PlanetaryBody*> _planets)
+void Game::DisplayAsteroidInfo(std::vector<Asteroid*> _asteroids, sf::RenderWindow* _window, std::vector<PlanetaryBody*> _planets) //Displaying the info of asteroids and star system (name outdated)S
 {
 	std::string asInfo = "ASTEROIDS VELOCITY\n\n";
-	for (int i = 0; i < _asteroids.size(); i++)
+	for (int i = 0; i < _asteroids.size(); i++) //For loop adding an entry for each asteroid on the right side of the screen
 	{
 		int tempX = _asteroids.at(i)->GetSpeedX();
 		int tempY = _asteroids.at(i)->GetSpeedY();
@@ -233,22 +235,22 @@ void Game::DisplayAsteroidInfo(std::vector<Asteroid*> _asteroids, sf::RenderWind
 	asteroidInfo.setString(asInfo);
 
 	std::string plInfo = "The [" + _planets.at(0)->GetName() + "] System\n\n";	
-	for (int i = 1; i < _planets.size(); i++)
+	for (int i = 1; i < _planets.size(); i++) //For loop adding an entry for each planet on the left side of the screen
 	{
 		plInfo += _planets.at(i)->GetName() + "\n" + "Atmosphere: " + _planets.at(i)->GetAtmosphereName() + "\nStrength: " + std::to_string(_planets.at(i)->GetThickness()) + "%\n\n";
 	}
 	planetInfo.setString(plInfo);
 
-	collisionAlert.setString(lastCollision);
+	collisionAlert.setString(lastCollision); //Updating the collision alert with information on the last collision (see CollisionDetection())
 }
 
-void Game::DisplayPlanetaryBodyNames(std::vector<PlanetaryBody*> _planetList, sf::RenderWindow* _window, float _zoomView, std::vector<Asteroid*> _asteroidList)
+void Game::DisplayPlanetaryBodyNames(std::vector<PlanetaryBody*> _planetList, sf::RenderWindow* _window, float _zoomView, std::vector<Asteroid*> _asteroidList) //Displaying the names of each planet, star and asteroid
 {
 	sf::Text planetBodyText;
 	planetBodyText.setFont(font);
-	planetBodyText.setCharacterSize(16 * _zoomView);
+	planetBodyText.setCharacterSize(16 * _zoomView); //Set character size relative to the view's zoom
 
-	for (int i = 0; i < _planetList.size(); i++)
+	for (int i = 0; i < _planetList.size(); i++) //Planet list includes star, so no need to include star manually
 	{
 		planetBodyText.setString(_planetList.at(i)->GetName());
 		planetBodyText.setPosition(_planetList.at(i)->GetPos());
@@ -262,25 +264,26 @@ void Game::DisplayPlanetaryBodyNames(std::vector<PlanetaryBody*> _planetList, sf
 	}
 }
 
-void Game::CameraPan()
+void Game::CameraPan() //Moving the camera when holding right-click
 {
 	sf::Vector2f tempMousePos = sf::Vector2f(sf::Mouse::getPosition().x - panningStart.x, sf::Mouse::getPosition().y - panningStart.y);
 	view.move(-1.0f * tempMousePos * viewZoom);
 	panningStart = sf::Vector2f(sf::Mouse::getPosition());
 }
 
-float Game::RandomRGBValue()
+float Game::RandomRGBValue() //Calculating a random value between 0 and 255, for use in a sf::color
 {
 	return rand() % 254 + 1;
 }
 
-void Game::CollisionDetection(std::vector<PlanetaryBody*> _planetList, std::vector<Asteroid*> _asteroidList, std::vector<GameObject*> _gameObjectList)
+void Game::CollisionDetection(std::vector<PlanetaryBody*> _planetList, std::vector<Asteroid*> _asteroidList, std::vector<GameObject*> _gameObjectList) //Detecting collisions for asteroids
 {
-	
 	for (int i = 0; i < _asteroidList.size(); i++)
 	{
 		for (int j = 0; j < _planetList.size(); j++)
 		{
+			//Loop through asteroid and planet vectors and check their distances to see if it's less than their total combined radii
+			//If true, delete the asteroid
 			sf::Vector2f tempDist = _asteroidList.at(i)->GetPos() - _planetList.at(j)->GetPos();
 			float minimumDistance = (_asteroidList.at(i)->GetRadius() * _asteroidList.at(i)->GetScale()) + (_planetList.at(j)->GetRadius() * _planetList.at(j)->GetScale());
 			if ((tempDist.x * tempDist.x) + (tempDist.y * tempDist.y) < minimumDistance * minimumDistance && _asteroidList.at(i)->GetState() == AsteroidState::AS_SIM)
@@ -289,6 +292,7 @@ void Game::CollisionDetection(std::vector<PlanetaryBody*> _planetList, std::vect
 				{
 					if (_gameObjectList.at(k) == _asteroidList.at(i))
 					{
+						//Had to delete the pointer AND erase from the vectors, so searched for identical entries in each vector and marked them for removal
 						lastCollision = "Asteroid [" + _asteroidList.at(i)->GetName() + "] has collided with [" + _planetList.at(j)->GetName() + "].";
 						asteroidToDelete = i;
 						gameobjectToDelete = k;
@@ -299,7 +303,7 @@ void Game::CollisionDetection(std::vector<PlanetaryBody*> _planetList, std::vect
 	}
 }
 
-void Game::SetComposition()
+void Game::SetComposition() //Function for populating the elements and color vectors
 {
 	atmosphereElementName.push_back("Oxygen");
 	atmosphereElementName.push_back("Argon");

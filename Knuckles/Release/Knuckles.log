@@ -1,7 +1,11 @@
-﻿Build started 05/04/2017 14:58:29.
-     1>Project "F:\CTP\Asteroid Simulation\Knuckles\Knuckles.vcxproj" on node 2 (Build target(s)).
+﻿Build started 05/04/2017 16:10:31.
+     1>Project "\\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\Knuckles\Knuckles.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"F:\CTP\Asteroid Simulation\\SFML-2.4.2\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D SFML_STATIC /D _MBCS /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Release\\" /Fd"Release\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp NameGenerator.cpp main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"\\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\\SFML-2.4.2\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D SFML_STATIC /D _MBCS /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Release\\" /Fd"Release\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Asteroid.cpp Game.cpp GameObject.cpp main.cpp NameGenerator.cpp PlanetaryBody.cpp
+         Asteroid.cpp
+     1>Asteroid.cpp(10): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+     1>Asteroid.cpp(67): warning C4018: '<': signed/unsigned mismatch
+     1>Asteroid.cpp(83): warning C4018: '<': signed/unsigned mismatch
          Game.cpp
      1>Game.cpp(5): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
      1>Game.cpp(12): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
@@ -27,23 +31,29 @@
      1>Game.cpp(280): warning C4018: '<': signed/unsigned mismatch
      1>Game.cpp(282): warning C4018: '<': signed/unsigned mismatch
      1>Game.cpp(288): warning C4018: '<': signed/unsigned mismatch
-         NameGenerator.cpp
+         GameObject.cpp
+     1>GameObject.cpp(69): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>GameObject.cpp(82): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
          main.cpp
+         NameGenerator.cpp
+         PlanetaryBody.cpp
+     1>PlanetaryBody.cpp(80): warning C4018: '<': signed/unsigned mismatch
+     1>PlanetaryBody.cpp(93): warning C4018: '<': signed/unsigned mismatch
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\CTP\Asteroid Simulation\Release\Knuckles.exe" /NOLOGO /LIBPATH:"F:\CTP\Asteroid Simulation\\SFML-2.4.2\lib" "sfml-main.lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" "sfml-network-s.lib" "sfml-audio-s.lib" ws2_32.lib openal32.lib flac.lib vorbisenc.lib vorbisfile.lib vorbis.lib ogg.lib winmm.lib opengl32.lib gdi32.lib freetype.lib jpeg.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\CTP\Asteroid Simulation\Release\Knuckles.pdb" /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\CTP\Asteroid Simulation\Release\Knuckles.lib" /MACHINE:X86 /SAFESEH Release\Asteroid.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"\\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\Release\Knuckles.exe" /NOLOGO /LIBPATH:"\\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\\SFML-2.4.2\lib" "sfml-main.lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" "sfml-network-s.lib" "sfml-audio-s.lib" ws2_32.lib openal32.lib flac.lib vorbisenc.lib vorbisfile.lib vorbis.lib ogg.lib winmm.lib opengl32.lib gdi32.lib freetype.lib jpeg.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"\\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\Release\Knuckles.pdb" /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"\\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\Release\Knuckles.lib" /MACHINE:X86 /SAFESEH Release\Asteroid.obj
          Release\Game.obj
          Release\GameObject.obj
          Release\main.obj
          Release\NameGenerator.obj
          Release\PlanetaryBody.obj
          Generating code
-         2 of 810 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+         805 of 809 functions (99.5%) were compiled, the rest were copied from previous compilation.
            0 functions were new in current compilation
-           28 functions had inline decision re-evaluated but remain unchanged
+           0 functions had inline decision re-evaluated but remain unchanged
          Finished generating code
-         Knuckles.vcxproj -> F:\CTP\Asteroid Simulation\Release\Knuckles.exe
-     1>Done Building Project "F:\CTP\Asteroid Simulation\Knuckles\Knuckles.vcxproj" (Build target(s)).
+         Knuckles.vcxproj -> \\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\Release\Knuckles.exe
+     1>Done Building Project "\\nstu-uwe01.campus.ads.uwe.ac.uk\users1$\ac2-pitt\Personal\Asteroid Simulation\Asteroid-Trajectory-Tracking\Knuckles\Knuckles.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:12.35
+Time Elapsed 00:00:07.19
